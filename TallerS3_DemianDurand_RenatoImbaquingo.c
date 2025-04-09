@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
             }
 
         } while (result != 1);
-        if (opc1 >= 3 && opc1 <= 6 && (valid == 0 || valid2 == 0))
+        if (opc1 >= 3 && opc1 <= 7 && (valid == 0 || valid2 == 0))
         {
             printf("Ingrese primero los estudiantes y las materias.\n");
             continue;
