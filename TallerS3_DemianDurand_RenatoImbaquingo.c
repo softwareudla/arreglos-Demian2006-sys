@@ -84,8 +84,9 @@ int main(int argc, char *argv[])
                 for (int i = 0; i < cont; i++) {
                     printf("- %s\n", estudiantes[i]);
                 }
-                scanf(" %s", naux2);
-            
+                fflush (stdin);
+                fgets(naux2, 50, stdin);
+                naux2[strcspn(naux2, "\n")] = '\0';
                 for (int j = 0; j < cont; j++) {
                     if (strcmp(estudiantes[j], naux2) == 0) {
                         estudianteEncontrado = 1;
@@ -99,15 +100,15 @@ int main(int argc, char *argv[])
                                 result = scanf("%f", &notaTemp);
                                 if (result != 1) {
                                     printf("Entrada inválida. Ingrese un número válido.\n");
-                                    while (getchar() != '\n'); // Limpiar buffer
+                                    while (getchar() != '\n');
                                     notaTemp = -1;
+                                    continue;
                                 } else if (notaTemp < 0 || notaTemp > 10) {
                                     printf("Nota fuera de rango (0-10). Intente nuevamente.\n");
-                                } else {
-                                    nota1[j][i] += notaTemp;
-                                    cantidad[j][i]++;
                                 }
                             } while (notaTemp < 0 || notaTemp > 10);
+                            nota1[j][i] += notaTemp;
+                            cantidad[j][i]++;
                         }
                         break;
                     }
