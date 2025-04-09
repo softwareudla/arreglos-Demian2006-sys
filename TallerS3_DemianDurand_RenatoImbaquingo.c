@@ -21,7 +21,8 @@ int main(int argc, char *argv[])
             printf("4. Verificar promedio por asignatura\n");
             printf("5. Verificar promedio por estudiante\n");
             printf("6. Estudiantes aprobados y reprobados\n");
-            printf("7. Salir\n");
+            printf("7. Nota maxima y minima por estudiante y asignatura\n");
+            printf("8. Salir\n");
             printf("=========================\n");
             printf(">>");
             result = scanf("%d", &opc1);
@@ -217,8 +218,52 @@ int main(int argc, char *argv[])
                 printf("  Reprobados: %d\n", reprobados);
             }
             break;
-
         case 7:
+            printf("\n--- Por Estudiante ---\n");
+            for (int i = 0; i < cont; i++) {
+                float notaMax = -1, notaMin = 11;
+                int notasRegistradas = 0;
+        
+                for (int j = 0; j < cont2; j++) {
+                    if (cantidad[i][j] > 0) {
+                        float notaFinal = nota1[i][j] / cantidad[i][j];
+                        if (notaFinal > notaMax) notaMax = notaFinal;
+                        if (notaFinal < notaMin) notaMin = notaFinal;
+                        notasRegistradas = 1;
+                    }
+                }
+        
+                if (notasRegistradas) {
+                    printf("%s = Maxima: %.2f\tMinima: %.2f\n", estudiantes[i], notaMax, notaMin);
+                } else {
+                    printf("%s no tiene notas registradas.\n", estudiantes[i]);
+                }
+            }
+        
+            printf("\n--- Por asignatura ---\n");
+            for (int i = 0; i < cont2; i++) {
+                float notaMax = -1, notaMin = 11;
+                int notasRegistradas = 0;
+        
+                for (int j = 0; j < cont; j++) {
+                    if (cantidad[j][i] > 0) {
+                        float notaFinal = nota1[j][i] / cantidad[j][i];
+                        if (notaFinal > notaMax) notaMax = notaFinal;
+                        if (notaFinal < notaMin) notaMin = notaFinal;
+                        notasRegistradas = 1;
+                    }
+                }
+        
+                if (notasRegistradas) {
+                    printf("%s = Maxima: %.2f\tMinima: %.2f\n", asignaturas[i], notaMax, notaMin);
+                } else {
+                    printf("%s no tiene notas registradas.\n", asignaturas[i]);
+                }
+            }
+            break;
+    
+
+        case 8:
             printf("Saliendo del programa...");
             break;
 
@@ -226,7 +271,7 @@ int main(int argc, char *argv[])
             printf("Opcion no valida, ingrese una opcion valida\n");
             break;
         }
-    } while (opc1 != 7);
+    } while (opc1 != 8);
 
     return 0;
 }
