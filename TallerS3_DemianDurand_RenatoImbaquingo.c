@@ -56,25 +56,38 @@ int main(int argc, char *argv[])
                 printf("Numero maximo de estudiantes alcanzado (5)\n");
             }
             break;
+            case 2:
+            if (cont2 < 3) {
+                char nuevaMateria[50];
+                int materiaExiste = 0;
+        
+                do {
+                    materiaExiste = 0;
+        
+                    printf("Ingrese el nombre de la materia %d: ", cont2);
+                    fflush(stdin);
+                    fgets(nuevaMateria, 50, stdin);
+                    nuevaMateria[strcspn(nuevaMateria, "\n")] = '\0'; 
+        
 
-        case 2:
-            if (cont2 < 3)
-            {
-                printf("Ingresar materia %d: ", cont2);
-                fflush(stdin);
-                fgets(asignaturas[cont2], 50, stdin);
-                len2 = strlen(asignaturas[cont2]) - 1;
-                asignaturas[cont2][len2] = '\0';
+                    for (int i = 0; i < cont2; i++) {
+                        if (strcmp(asignaturas[i], nuevaMateria) == 0) {
+                            materiaExiste = 1;
+                            printf("La materia ya esta registrada. Intente nuevamente.\n");
+                            break;
+                        }
+                    }
+        
+                } while (materiaExiste); 
+        
+                // Si la materia no existe, se guarda
+                strcpy(asignaturas[cont2], nuevaMateria);
                 cont2++;
                 valid2++;
-            }
-            else
-            {
-                printf("Numero maximo de materias alcanzado (3)\n");
+            } else {
+                printf("Número máximo de materias alcanzado (3).\n");
             }
             break;
-
-        
         case 3:
             {
                 char naux2[50];
