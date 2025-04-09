@@ -5,7 +5,7 @@ int main(int argc, char *argv[])
     char estudiantes[5][50];
     char asignaturas[3][50];
     float promedioa1[5], promedioa2[5], promedioa3[5];
-    float nota1[5][3],mayor, menor,cantidad[5][3];
+    float nota1[5][3]={{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0}},mayor, menor,cantidad[5][3];
     int eaprobados;
     int opc1, cont = 0, result, len, valid = 0, cont2 = 0, valid2 = 0,len2;
     do
@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
         printf ("Ingrese la asignatura a la que desea acceder (nombre):\n");
         for (int i = 0; i < cont2; i++)
         {
-            printf ("-%s \n",asignaturas[i]);
+            printf ("- %s \n",asignaturas[i]);
         }
         scanf("%s",&naux);
         for (int i = 0; i < cont2; i++)
@@ -81,26 +81,33 @@ int main(int argc, char *argv[])
             printf ("Ingrese el estudiante a calificar(el nombre): \n");
             for (int k = 0; k < cont; k++)
             {
-                printf ("-%s \n",estudiantes[k]);
+                printf ("- %s \n",estudiantes[k]);
             }
             scanf("%s",&naux2);
             for (int j = 0; j < cont; j++)
             {
                 if (strcmp(estudiantes[j],naux2)==0){
                     do{
-                    if (nota1[j][i]<0 || nota1[j][i]>10){
-                        printf ("Opcion invalida, vuelva a ingresar");
-                    }else{
                     printf ("Ingrese la nota\n");
-                    scanf ("%f",&nota1[j][i]);
-                    nota1[j][i]+=nota1[j][i];
-                    cantidad[j][i]++;
+                    result= scanf ("%f",&nota1[j][i]);
+                    if (result!=1){
+                        printf("Entrada inválida. Por favor, ingrese un número entero.\n");
+                        while (getchar() != '\n');
+                        nota1[j][i] = -1; 
+                    }
+                    else if (nota1[j][i]<0 || nota1[j][i]>=10){
+                        printf ("Calificacion invalida, vuelva a ingresar\n");
+                    }else{
+                        nota1[j][i]+=nota1[j][i];
+                        cantidad[j][i]++;
                     }
                     }while (nota1[j][i]<0 || nota1[j][i]>10);
+                }else{
+                    printf ("Estudiante no encontrado");
                 }
             }
         }else{
-            printf ("Asignatura no encontrada");
+            printf ("Asignatura no encontrada\n");
         }
         }
 
